@@ -17,8 +17,9 @@
                       <v-select label="Packages" :items="packages" item-text="name" item-value="id" v-model="packageId" :rules="[v => !!v || 'Required']" solo-inverted></v-select>
                   </v-flex>
                    <v-flex xs12>
-                   <v-checkbox label="Status" color="success" v-model="status"></v-checkbox>
-                
+                  <v-flex xs12>
+                      <v-select label="Status" :items="statusENUM" v-model="status" :rules="[v => !!v || 'Required']" solo-inverted></v-select>
+                  </v-flex>
                   </v-flex>
                   <v-flex xs12>
                     <v-btn class="mx-0 my-0 ml-2" style="min-height:48px" block color="success" @click="submit" flat>send</v-btn>
@@ -57,7 +58,7 @@ export default {
           this.name = this.user.name
           this.pin = this.user.pin
           this.packageId = this.user.packageId
-          this.status = this.user.status == 1? true: false
+          this.status = this.user.status == 1? 'ACTIVE': 'INACTIVE'
           this.uuid = this.user.uuid
 
       },
@@ -67,9 +68,10 @@ export default {
               id: this.id,
               name: this.name,
               packageId: this.packageId,
+              operatorId: this.operator.id,
               pin: this.pin,
               uuid: this.uuid,
-              status: this.status == true? 1: 0
+              status: this.status == 'ACTIVE'? 1: 0
           }
         this.$store.dispatch('updateUser', body)
         .then(() => {
@@ -84,6 +86,7 @@ export default {
           return this.users.find(el => el.id == this.id)
       },
       ...mapState({
+          operator: state => state.operator,
           packages: state => state.packages,
           users: state => state.users
       })

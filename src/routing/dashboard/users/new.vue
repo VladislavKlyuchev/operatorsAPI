@@ -13,11 +13,9 @@
                    <v-flex xs12>
                     <v-text-field label="PIN" hint="password for 18+ channels" solo-inverted v-model="pin" :rules="[v => !!v || 'Required']"></v-text-field>
                   </v-flex>
-                   <v-flex xs12>
-                   <v-select label="Operators" :items="operators" item-text="name" item-value="id" v-model="operatorId" :rules="[v => !!v || 'Required']" solo-inverted></v-select>
-                  </v-flex>
+                 
                   <v-flex xs12>
-                      <v-select label="Packages" :items="filterPackages" item-text="name" item-value="id" v-model="packageId" :rules="[v => !!v || 'Required']" solo-inverted></v-select>
+                      <v-select label="Packages" :items="packages" item-text="name" item-value="id" v-model="packageId" :rules="[v => !!v || 'Required']" solo-inverted></v-select>
                   </v-flex>
                   <v-flex xs12>
                       <v-select label="Status" :items="statusENUM" v-model="status" :rules="[v => !!v || 'Required']" solo-inverted></v-select>
@@ -69,12 +67,9 @@ export default {
     }
   },
   computed: {
-      filterPackages() {
-          return this.packages.filter(el => el.operatorId == this.operatorId)
-      },
       ...mapState({
           packages: state => state.packages || [],
-          operators: state => state.operators || []
+          operator: state => state.operator 
       })
   }
 };

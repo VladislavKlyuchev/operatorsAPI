@@ -4,8 +4,6 @@ import Auth from '@/routing/auth'
 import { store } from '../../store'
 import Dashboard from '@/routing/dashboard'
 import packages from '@/routing/dashboard/packages'
-import newPackages from '@/routing/dashboard/packages/newPackages'
-import addChannelsToPackages from '@/routing/dashboard/packages/addChannels'
 import users from '@/routing/dashboard/users';
 import newUsers from '@/routing/dashboard/users/new';
 import editUser from '@/routing/dashboard/users/edit'
@@ -31,15 +29,6 @@ export default new Router({
           path: 'packages',
           name: 'packages',
           component: packages
-        },
-        {
-          path: 'packages/addChannels/:id',
-          props: true,
-          component: addChannelsToPackages
-        },
-        {
-          path: 'packages/new',
-          component: newPackages
         },
        
         {

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-const link = 'http://192.168.22.120:5000'
+const link = 'http://172.29.95.33:5000'
 const pass = 123321
 Vue.use(Vuex)
 
@@ -14,7 +14,7 @@ axios.interceptors.response.use((response) => {
 export const store = new Vuex.Store({
   state: {
     auth: false,
-    password: 123321,
+    password: null,
     channelsWithPackage: null,
     operator: null,
     packages: null,
@@ -85,14 +85,15 @@ export const store = new Vuex.Store({
         commit('setUsers', res.data)
       })
     },
-    createNewUser({ dispatch }, body) {
-      body.dashboard = pass
-      axios.post(`${link}/createNewUser`, body).then(() => {
+    createNewUser({ dispatch, state }, body) {
+      body.key = state.password
+      axios.post(`${link}/createAccount`, body).then(() => {
         dispatch('getUsers')
       })
     },
-    updateUser({ dispatch }, body) {
-      body.dashboard = pass
+    updateUser({ dispatch, state}, body) {
+      body.key = state.password
+      console.log(body)
       axios.post(`${link}/operatorUpdateUser`, body).then(() => {
         dispatch('getUsers')
       })
