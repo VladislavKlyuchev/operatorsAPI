@@ -36,7 +36,6 @@ export default {
   data() {
     return {
       name: null,
-      operatorId: null,
       pin: null,
       packageId: null,
       status: null,
@@ -52,7 +51,7 @@ export default {
       if(this.$refs.form.validate()) {
           const body = {
               name: this.name,
-              operatorId: this.operatorId,
+              operatorId: this.operator.id,
               packageId: this.packageId,
               pin: this.pin,
               uuid: this.uuid,
