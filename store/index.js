@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-const link = window.link || 'http://172.21.229.81'
+const link = window.link || 'http://192.168.0.103:5000'
 Vue.use(Vuex)
 
 axios.interceptors.response.use(

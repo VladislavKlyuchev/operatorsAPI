@@ -8,12 +8,17 @@
                     <v-text-field label="Name" solo-inverted v-model="name" :rules="[v => !!v || 'Required']"></v-text-field>
                   </v-flex>
                   <v-flex xs12>
-                    <v-text-field label="UUID" v-model="uuid" solo-inverted  :rules="[v => !!v || 'Required']"></v-text-field>
+                    <v-text-field label="stbId" v-model="uuid" solo-inverted  :rules="[v => !!v || 'Required']"></v-text-field>
                   </v-flex>
                    <v-flex xs12>
                     <v-text-field label="PIN" hint="password for 18+ channels" solo-inverted v-model="pin" :rules="[v => !!v || 'Required']"></v-text-field>
                   </v-flex>
-                 
+                  <v-flex xs12>
+                    <v-text-field label="Version"  solo-inverted v-model="version" :rules="[v => !!v || 'Required']"></v-text-field>
+                  </v-flex>
+                   <v-flex xs12>
+                    <v-text-field label="apkUrl"  solo-inverted v-model="apkUrl" :rules="[v => !!v || 'Required']"></v-text-field>
+                  </v-flex>
                   <v-flex xs12>
                       <v-select label="Packages" :items="packages" item-text="name" item-value="id" v-model="packageId" :rules="[v => !!v || 'Required']" solo-inverted></v-select>
                   </v-flex>
@@ -40,6 +45,8 @@ export default {
       packageId: null,
       status: null,
       uuid: null,
+      version: null,
+      apkUrl: null,
       statusENUM: [
           'ACTIVE',
           'INACTIVE'
@@ -54,6 +61,8 @@ export default {
               operatorId: this.operator.id,
               packageId: this.packageId,
               pin: this.pin,
+              version: this.version,
+              apkUrl: this.apkUrl,
               uuid: this.uuid,
               status: this.status == 'ACTIVE'? true: false
           }

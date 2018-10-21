@@ -8,7 +8,13 @@
                     <v-text-field label="Name" solo-inverted v-model="name" :rules="[v => !!v || 'Required']"></v-text-field>
                   </v-flex>
                   <v-flex xs12>
-                    <v-text-field label="UUID" v-model="uuid" solo-inverted  :rules="[v => !!v || 'Required']"></v-text-field>
+                    <v-text-field label="stbId" v-model="uuid" solo-inverted  :rules="[v => !!v || 'Required']"></v-text-field>
+                  </v-flex>
+                   <v-flex xs12>
+                    <v-text-field label="Version"  solo-inverted v-model="version" :rules="[v => !!v || 'Required']"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12>
+                    <v-text-field label="apkUrl"  solo-inverted v-model="apkUrl" :rules="[v => !!v || 'Required']"></v-text-field>
                   </v-flex>
                    <v-flex xs12>
                     <v-text-field label="PIN" hint="password for 18+ channels" solo-inverted v-model="pin" :rules="[v => !!v || 'Required']"></v-text-field>
@@ -44,6 +50,8 @@ export default {
       name: null,
       pin: null,
       packageId: null,
+      version: null,
+      apkUrl: null,
       status: null,
       uuid: null,
       statusENUM: [
@@ -57,6 +65,8 @@ export default {
           console.log(this.user)
           this.name = this.user.name
           this.pin = this.user.pin
+          this.version = this.user.version
+          this.apkUrl = this.user.apkUrl
           this.packageId = this.user.packageId
           this.status = this.user.status == 1? 'ACTIVE': 'INACTIVE'
           this.uuid = this.user.uuid
@@ -70,6 +80,8 @@ export default {
               packageId: this.packageId,
               operatorId: this.operator.id,
               pin: this.pin,
+              version: this.version,
+              apkUrl: this.apkUrl,
               uuid: this.uuid,
               status: this.status == 'ACTIVE'? 1: 0
           }

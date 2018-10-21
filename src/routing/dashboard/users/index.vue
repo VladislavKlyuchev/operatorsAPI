@@ -15,6 +15,9 @@
               <td class="text-xs-left">{{ props.item.id }}</td>
               <td class="text-xs-left">{{ props.item.name }}</td>
               <td class="text-xs-left">{{ props.item.uuid }}</td>
+              <td class="text-xs-left">{{ props.item.version }}</td>
+              <td class="text-xs-left">{{ props.item.apkUrl }}</td>
+
               <td class="text-xs-left">
                 <v-icon v-if="props.item.status" color="success">done</v-icon>
                 <v-icon v-else color="error">clear</v-icon>
@@ -61,8 +64,11 @@ export default {
           value: "id",
          
         },
-        { text: "Name", value: "name", },
-        { text: "UUID", value: "uuid", },
+        { text: "name", value: "name", },
+        { text: "stbId", value: "uuid", },
+        { text: "version", value: "version"},
+        { text: "apkUrl", value: "apkUrl"},
+        
         { text: "Status", value: "status",  },
         { text: "package ID", value: "packageId", },
         {
