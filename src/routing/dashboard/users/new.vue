@@ -58,7 +58,7 @@ export default {
       if(this.$refs.form.validate()) {
           const body = {
               name: this.name,
-              operatorId: this.operator.id,
+              operatorId: this.operator.key,
               packageId: this.packageId,
               pin: this.pin,
               version: this.version,

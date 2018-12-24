@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 const link = window.link || 'http://192.168.0.103:5000'
 Vue.use(Vuex)
-
+const version = '1'
 axios.interceptors.response.use(
   response => {
     return response
@@ -57,7 +57,7 @@ export const store = new Vuex.Store({
     asyncAuth ({ dispatch, commit }, key) {
       return new Promise(function (resolve, reject) {
         axios
-          .post(`${link}/authOperator`, { key: key })
+          .post(`${link}/authOperator`, { operatorId: key })
           .then(res => {
             commit('auth', res.data)
             resolve()
@@ -69,14 +69,14 @@ export const store = new Vuex.Store({
     },
     getPackages ({ state, commit, dispatch }) {
       axios
-        .post(`${link}/listPackagesWithPrices`, { key: state.password })
+        .get(`${link}/billing-api/v${version}/${state.password}/package`)
         .then(result => {
           state.packages = result.data
         })
     },
     getUsers ({ state, commit }) {
       const body = {
-        key: state.password
+        operatorId: state.password
       }
       axios.post(`${link}/getOperatorsUsers`, body).then(res => {
         commit('setUsers', res.data)
@@ -89,7 +89,7 @@ export const store = new Vuex.Store({
       })
     },
     updateUser ({ dispatch, state }, body) {
-      body.key = state.password
+      body.operatorId = state.password
       console.log(body)
       axios.post(`${link}/operatorUpdateUser`, body).then(() => {
         dispatch('getUsers')
@@ -97,7 +97,7 @@ export const store = new Vuex.Store({
     },
     getHistory ({ commit, state }) {
       axios
-        .post(`${link}/userHistory`, { key: state.password })
+        .post(`${link}/userHistory`, { operatorId: state.password })
         .then(result => {
           commit('setHistory', result.data)
         })
